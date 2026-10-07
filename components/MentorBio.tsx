@@ -1,4 +1,6 @@
 // components/MentorBio.tsx
+import Image from 'next/image';
+
 export default function MentorBio() {
   return (
     <section
@@ -10,14 +12,16 @@ export default function MentorBio() {
         <div>
           <div
             className="poster-card relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden bg-campaignRed lg:mx-0"
-            data-placeholder="mentor-photo"
             aria-label="Foto do mentor Fellipe Barcelos"
           >
-            <div className="absolute inset-0 bg-[url('/brand/textura-grunge.webp')] bg-[length:420px] opacity-25 mix-blend-multiply" />
-            <svg viewBox="0 0 320 400" className="absolute inset-x-0 bottom-0 w-full text-ink" fill="currentColor" aria-hidden="true">
-              <circle cx="160" cy="122" r="68" />
-              <path d="M47 400c3-101 45-164 113-164s110 63 113 164H47Z" />
-            </svg>
+            <Image
+              src="/brand/fellipe-barcelos-final-2026.jpg"
+              alt="Fellipe Barcelos"
+              fill
+              sizes="(min-width: 1024px) 384px, (min-width: 640px) 384px, calc(100vw - 40px)"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-[url('/brand/textura-grunge.webp')] bg-[length:420px] opacity-10 mix-blend-multiply" aria-hidden="true" />
             <div className="absolute inset-4 border-2 border-sun" aria-hidden="true" />
           </div>
         </div>

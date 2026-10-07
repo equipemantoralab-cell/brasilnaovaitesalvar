@@ -4,7 +4,7 @@ export default function Dobra2() {
     <section
       id="sobre"
       data-section="dobra2"
-      className="paper-noise relative overflow-hidden bg-sun px-5 py-20 sm:px-8 sm:py-28"
+      className="cream-paper relative overflow-hidden bg-paper px-5 py-20 sm:px-8 sm:py-28"
     >
       <img src="/brand/marker-circulo.svg" alt="" className="pointer-events-none absolute -right-20 top-12 w-72 opacity-50 sm:w-[30rem]" aria-hidden="true" />
       <div className="relative mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">

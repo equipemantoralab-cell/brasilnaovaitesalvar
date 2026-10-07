@@ -58,6 +58,14 @@ body {
   background-blend-mode: normal, multiply;
 }
 
+.cream-paper {
+  background-image:
+    linear-gradient(rgba(255, 253, 238, 0.9), rgba(255, 253, 238, 0.9)),
+    url('/brand/papel-grunge.webp');
+  background-size: auto, 720px auto;
+  background-blend-mode: normal, multiply;
+}
+
 .grunge-surface {
   background-image:
     linear-gradient(rgba(35, 35, 36, 0.9), rgba(35, 35, 36, 0.9)),

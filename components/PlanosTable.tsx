@@ -97,10 +97,14 @@ export default function PlanosTable() {
     <section
       id="ingressos"
       data-section="planos"
-      className="hero-surface relative px-5 py-20 text-cream sm:px-8 sm:py-28"
+      className="relative overflow-hidden bg-campaignRed px-5 py-20 text-cream sm:px-8 sm:py-28"
     >
+      <div className="pointer-events-none absolute inset-0 bg-[url('/brand/textura-grunge.webp')] bg-[length:480px_480px] opacity-20 mix-blend-multiply" aria-hidden="true" />
       <div className="mx-auto max-w-6xl">
-        <h2 className="mb-12 text-center font-display text-6xl font-black uppercase leading-none tracking-tight text-paper sm:mb-16 sm:text-8xl">Escolha seu ingresso</h2>
+        <div className="relative mb-12 text-center sm:mb-16">
+          <span className="inline-block rotate-[-1deg] bg-forest px-4 py-2 text-sm font-black uppercase tracking-[0.12em] text-paper">O evento é gratuito. Você escolhe como quer participar.</span>
+          <h2 className="mt-5 font-display text-7xl uppercase leading-none text-paper sm:text-9xl">Escolha seu ingresso</h2>
+        </div>
 
         {error && (
           <p role="alert" className="mx-auto mb-6 max-w-2xl rounded-xl border border-red-300/40 bg-red-950/60 p-4 text-center text-sm font-bold text-red-100" data-state="error">
@@ -109,7 +113,7 @@ export default function PlanosTable() {
         )}
 
         <div className="-mx-5 overflow-x-auto px-5 pb-5 sm:mx-0 sm:px-0">
-          <table className="min-w-[780px] w-full border-separate border-spacing-0 overflow-hidden rounded-2xl border border-cream/10 bg-paper text-ink shadow-2xl" data-table="planos">
+          <table className="poster-card relative min-w-[780px] w-full border-separate border-spacing-0 overflow-hidden bg-paper text-ink" data-table="planos">
           <thead>
             <tr className="bg-cream">
               <th className="w-[25%] border-b border-ink/10 p-5 text-left text-xs font-extrabold uppercase tracking-[0.14em] text-ink/60">Benefício</th>
@@ -142,7 +146,7 @@ export default function PlanosTable() {
                   <button
                     onClick={() => handleCta(key)}
                     disabled={loadingPlan !== null}
-                    className={`min-h-12 w-full rounded-xl px-4 py-3 text-xs font-black tracking-wide transition duration-300 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 ${key === 'pro' ? 'bg-forest text-lime shadow-lg hover:bg-ink' : 'border-2 border-forest bg-transparent text-forest hover:bg-forest hover:text-cream'}`}
+                    className={`min-h-12 w-full border-2 border-ink px-4 py-3 text-xs font-black uppercase tracking-wide transition duration-300 hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 ${key === 'pro' ? 'bg-forest text-paper shadow-[5px_5px_0_#232324] hover:bg-ink' : 'bg-sun text-ink shadow-[5px_5px_0_#232324] hover:bg-campaignRed hover:text-paper'}`}
                     data-cta={`plano-${key}`}
                   >
                     {loadingPlan === key ? 'Aguarde...' : PLANS[key].cta}

@@ -62,7 +62,7 @@ export default function CapturaForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="mx-auto flex w-full max-w-md flex-col gap-5 rounded-3xl border border-cream/10 bg-paper p-6 text-ink shadow-2xl sm:p-9"
+      className="poster-card paper-noise mx-auto flex w-full max-w-md flex-col gap-5 bg-paper p-6 text-ink sm:p-9"
       data-form="captura"
     >
       <div>
@@ -74,7 +74,7 @@ export default function CapturaForm() {
           type="text"
           value={form.nome}
           onChange={(e) => setForm({ ...form, nome: e.target.value })}
-          className="min-h-12 w-full rounded-xl border border-ink/15 bg-cream/50 px-4 py-3 text-base text-ink transition placeholder:text-ink/35 hover:border-emerald/50 focus:border-emerald focus:bg-paper focus:outline-none focus:ring-4 focus:ring-emerald/10"
+          className="min-h-12 w-full border-2 border-ink bg-paper px-4 py-3 text-base text-ink transition placeholder:text-ink/35 focus:bg-sun/10 focus:outline-none"
           aria-describedby={errors.nome ? 'error-nome' : undefined}
           data-field="nome"
         />
@@ -94,7 +94,7 @@ export default function CapturaForm() {
           type="email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="min-h-12 w-full rounded-xl border border-ink/15 bg-cream/50 px-4 py-3 text-base text-ink transition placeholder:text-ink/35 hover:border-emerald/50 focus:border-emerald focus:bg-paper focus:outline-none focus:ring-4 focus:ring-emerald/10"
+          className="min-h-12 w-full border-2 border-ink bg-paper px-4 py-3 text-base text-ink transition placeholder:text-ink/35 focus:bg-sun/10 focus:outline-none"
           aria-describedby={errors.email ? 'error-email' : undefined}
           data-field="email"
         />
@@ -115,7 +115,7 @@ export default function CapturaForm() {
           placeholder="(11) 99999-9999"
           value={form.whatsapp}
           onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
-          className="min-h-12 w-full rounded-xl border border-ink/15 bg-cream/50 px-4 py-3 text-base text-ink transition placeholder:text-ink/35 hover:border-emerald/50 focus:border-emerald focus:bg-paper focus:outline-none focus:ring-4 focus:ring-emerald/10"
+          className="min-h-12 w-full border-2 border-ink bg-paper px-4 py-3 text-base text-ink transition placeholder:text-ink/35 focus:bg-sun/10 focus:outline-none"
           aria-describedby={errors.whatsapp ? 'error-whatsapp' : undefined}
           data-field="whatsapp"
         />
@@ -129,7 +129,7 @@ export default function CapturaForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-2 min-h-14 rounded-xl bg-lime px-6 py-4 text-sm font-black tracking-wide text-ink shadow-lime transition duration-300 hover:-translate-y-1 hover:bg-sun disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+        className="poster-card mt-2 min-h-14 bg-sun px-6 py-4 text-sm font-black uppercase tracking-wide text-ink transition duration-300 hover:-translate-y-1 hover:bg-forest hover:text-paper disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
         data-cta="captura-submit"
       >
         {submitting ? 'Enviando...' : 'FINALIZAR CADASTRO'}

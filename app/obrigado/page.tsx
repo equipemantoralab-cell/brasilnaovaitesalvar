@@ -16,8 +16,8 @@ export default function ObrigadoPage() {
       className="hero-surface relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-16 text-center text-cream sm:px-8"
       data-page="obrigado"
     >
-      <div className="pointer-events-none absolute -right-32 top-12 h-80 w-80 rounded-full border border-lime/20" aria-hidden="true" />
-      <section className="relative z-10 w-full max-w-xl rounded-3xl border border-cream/10 bg-paper p-6 text-ink shadow-2xl sm:p-10">
+      <img src="/brand/marker-seta.svg" alt="" className="pointer-events-none absolute right-10 top-10 w-16 rotate-[18deg]" aria-hidden="true" />
+      <section className="poster-card paper-noise relative z-10 w-full max-w-xl bg-paper p-6 text-ink sm:p-10">
         <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-[#25D366]/15 text-[#138a3d]" aria-hidden="true">
           <svg viewBox="0 0 24 24" className="h-10 w-10" fill="none" stroke="currentColor" strokeWidth="2.2">
             <path d="m5 12 4 4L19 6" strokeLinecap="round" strokeLinejoin="round" />
@@ -39,7 +39,7 @@ export default function ObrigadoPage() {
           </div>
         </div>
 
-        <h1 className="font-display text-6xl font-black uppercase leading-none tracking-tight text-forest sm:text-7xl">Só falta um passo!</h1>
+        <h1 className="font-display text-7xl uppercase leading-none text-forest sm:text-8xl">Só falta um passo!</h1>
 
         <p className="mx-auto mt-6 max-w-md text-sm font-medium leading-7 text-ink/65 sm:text-base">
           Clique no botão abaixo e entre agora nosso grupo oficial do WhatsApp pra
@@ -50,7 +50,7 @@ export default function ObrigadoPage() {
           href={groupUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-7 inline-flex min-h-14 w-full items-center justify-center rounded-xl bg-[#25D366] px-8 py-4 text-sm font-black tracking-wide text-[#052e16] shadow-[0_16px_40px_rgba(37,211,102,.25)] transition duration-300 hover:-translate-y-1 hover:bg-[#34e879] hover:shadow-[0_20px_50px_rgba(37,211,102,.35)]"
+          className="poster-card mt-7 inline-flex min-h-14 w-full items-center justify-center bg-[#25D366] px-8 py-4 text-sm font-black uppercase tracking-wide text-[#052e16] transition duration-300 hover:-translate-y-1 hover:bg-[#34e879]"
           data-cta="whatsapp-group"
         >
           <svg viewBox="0 0 24 24" className="mr-3 h-5 w-5" fill="currentColor" aria-hidden="true">

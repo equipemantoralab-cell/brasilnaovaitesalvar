@@ -2,20 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import AnalyticsGA4 from '@/components/AnalyticsGA4';
 import MetaPixel from '@/components/MetaPixel';
-import { Barlow_Condensed, Manrope } from 'next/font/google';
-
-const manrope = Manrope({
-  subsets: ['latin'],
-  variable: '--font-manrope',
-  display: 'swap',
-});
-
-const barlowCondensed = Barlow_Condensed({
-  subsets: ['latin'],
-  weight: ['600', '700', '800', '900'],
-  variable: '--font-barlow-condensed',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: 'O Brasil Não Vai Te Salvar — Imersão ao Vivo',
@@ -30,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={`${manrope.variable} ${barlowCondensed.variable} font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <AnalyticsGA4 />
         <MetaPixel />
         {children}

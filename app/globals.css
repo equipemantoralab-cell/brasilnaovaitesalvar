@@ -2,41 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Oferta do Dia';
+  src: url('/fonts/oferta-do-dia.ttf') format('truetype');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400 900;
+}
+
 html {
   scroll-behavior: smooth;
-  background: #06130f;
+  background: #232324;
 }
 
 body {
   min-width: 320px;
-  background: #f4f0e6;
-  color: #06130f;
+  background: #fffdee;
+  color: #232324;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: #d9f64a;
-  color: #06130f;
+  background: #f5ad3e;
+  color: #232324;
 }
 
 :focus-visible {
-  outline: 3px solid #f7c948;
+  outline: 3px solid #f5ad3e;
   outline-offset: 4px;
 }
 
 .hero-surface {
-  background-color: #06130f;
+  background-color: #d61600;
   background-image:
-    radial-gradient(circle at 14% 18%, rgba(15, 107, 79, 0.55), transparent 28rem),
-    radial-gradient(circle at 88% 78%, rgba(88, 184, 217, 0.16), transparent 25rem),
-    linear-gradient(rgba(217, 246, 74, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(217, 246, 74, 0.055) 1px, transparent 1px);
-  background-size: auto, auto, 42px 42px, 42px 42px;
+    linear-gradient(rgba(214, 22, 0, 0.88), rgba(214, 22, 0, 0.88)),
+    url('/brand/textura-grunge.webp');
+  background-size: auto, 480px 480px;
+  background-blend-mode: normal, multiply;
 }
 
 .paper-noise {
-  background-image: radial-gradient(rgba(6, 19, 15, 0.12) 0.7px, transparent 0.7px);
-  background-size: 7px 7px;
+  background-image:
+    linear-gradient(rgba(245, 173, 62, 0.86), rgba(245, 173, 62, 0.86)),
+    url('/brand/papel-grunge.webp');
+  background-size: auto, 720px auto;
+  background-blend-mode: normal, multiply;
+}
+
+.grunge-surface {
+  background-image:
+    linear-gradient(rgba(35, 35, 36, 0.9), rgba(35, 35, 36, 0.9)),
+    url('/brand/textura-grunge.webp');
+  background-size: auto, 480px 480px;
+  background-blend-mode: normal, multiply;
+}
+
+.halftone-corner::after {
+  content: '';
+  position: absolute;
+  right: -6rem;
+  bottom: -6rem;
+  width: min(38rem, 80vw);
+  aspect-ratio: 1.5;
+  background: url('/brand/textura-halftone.webp') center / contain no-repeat;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.campaign-ticker {
+  background: #287646;
+  color: #fffdee;
+  border-block: 2px solid #232324;
+  font-family: 'Oferta do Dia', 'Arial Narrow', sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.poster-card {
+  border: 2px solid #232324;
+  border-radius: 0;
+  box-shadow: 9px 9px 0 #232324;
+}
+
+.marker-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.marker-underline::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: -3%;
+  right: -3%;
+  bottom: -0.08em;
+  height: 0.3em;
+  background: #f5ad3e;
+  transform: rotate(-1.5deg);
+}
+
+[data-page='quiz'] [data-screen='question'] > div > div:last-child,
+[data-page='quiz'] [data-form='quiz-capture'],
+[data-page='quiz'] [data-quiz='result-card'] {
+  border: 2px solid #232324;
+  border-radius: 0;
+  box-shadow: 9px 9px 0 #232324;
+}
+
+[data-page='quiz'] button,
+[data-page='quiz'] input {
+  border-radius: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

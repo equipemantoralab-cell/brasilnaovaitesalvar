@@ -9,25 +9,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: '#06130f',
-        forest: '#0a2f25',
-        emerald: '#0f6b4f',
-        lime: '#d9f64a',
-        sun: '#f7c948',
-        cream: '#f4f0e6',
-        paper: '#fffdf7',
-        sky: '#58b8d9',
+        ink: '#232324',
+        forest: '#287646',
+        emerald: '#287646',
+        lime: '#f5ad3e',
+        sun: '#f5ad3e',
+        cream: '#fffdee',
+        paper: '#fffdee',
+        sky: '#112b99',
+        campaignRed: '#d61600',
+        campaignBlue: '#112b99',
       },
       fontFamily: {
-        sans: ['var(--font-manrope)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['var(--font-barlow-condensed)', 'Arial Narrow', 'sans-serif'],
+        sans: ['Arial', 'Helvetica', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Oferta do Dia"', 'Arial Narrow', 'sans-serif'],
       },
       boxShadow: {
-        'lime': '0 0 0 1px rgba(217, 246, 74, 0.35), 0 18px 50px rgba(217, 246, 74, 0.16)',
-        'card': '0 24px 70px rgba(6, 19, 15, 0.12)',
+        'lime': '7px 7px 0 #232324',
+        'card': '10px 10px 0 rgba(35, 35, 36, 0.9)',
       },
       backgroundImage: {
-        'hero-grid': 'linear-gradient(rgba(217,246,74,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(217,246,74,.06) 1px, transparent 1px)',
+        'hero-grid': 'url("/brand/textura-grunge.webp")',
       },
       animation: {
         'soft-pulse': 'soft-pulse 3s ease-in-out infinite',
@@ -38,8 +40,8 @@ const config: Config = {
       },
       keyframes: {
         'soft-pulse': {
-          '0%, 100%': { boxShadow: '0 0 0 0 rgba(217, 246, 74, 0)' },
-          '50%': { boxShadow: '0 0 0 10px rgba(217, 246, 74, 0.08)' },
+          '0%, 100%': { boxShadow: '7px 7px 0 #232324' },
+          '50%': { boxShadow: '11px 11px 0 #232324' },
         },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },

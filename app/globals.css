@@ -41,6 +41,15 @@ body {
   background-blend-mode: normal, multiply;
 }
 
+.hero-kv-surface {
+  background-color: #f5ad3e;
+  background-image:
+    linear-gradient(rgba(245, 173, 62, 0.88), rgba(245, 173, 62, 0.88)),
+    url('/brand/papel-grunge.webp');
+  background-size: auto, 720px auto;
+  background-blend-mode: normal, multiply;
+}
+
 .paper-noise {
   background-image:
     linear-gradient(rgba(245, 173, 62, 0.86), rgba(245, 173, 62, 0.86)),

@@ -33,7 +33,7 @@ export default function ObrigadoPage() {
           aria-label="Progresso da inscrição"
           data-progress="98"
         >
-          <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.12em] text-forest">Sua inscrição está 98% concluída!</p>
+          <p className="mb-3 text-sm font-black uppercase tracking-[0.12em] text-forest">Sua inscrição está 98% concluída!</p>
           <div className="h-3 w-full overflow-hidden rounded-full bg-forest/10 p-0.5">
             <div className="h-full rounded-full bg-gradient-to-r from-emerald to-lime shadow-sm" style={{ width: '98%' }} />
           </div>
@@ -41,7 +41,7 @@ export default function ObrigadoPage() {
 
         <h1 className="font-display text-7xl uppercase leading-none text-forest sm:text-8xl">Só falta um passo!</h1>
 
-        <p className="mx-auto mt-6 max-w-md text-sm font-medium leading-7 text-ink/65 sm:text-base">
+        <p className="mx-auto mt-6 max-w-md text-base font-semibold leading-7 text-ink/85 sm:text-lg">
           Clique no botão abaixo e entre agora nosso grupo oficial do WhatsApp pra
           ter acesso à imersão O Brasil não Vai Te Salvar:
         </p>
@@ -59,7 +59,7 @@ export default function ObrigadoPage() {
           ENTRAR NO GRUPO
         </a>
 
-        <p className="mx-auto mt-6 max-w-sm text-xs font-medium leading-6 text-ink/50 sm:text-sm">
+        <p className="mx-auto mt-6 max-w-sm text-sm font-semibold leading-6 text-ink/75 sm:text-base">
           &ldquo;E relaxa: o grupo é só pra te avisar sobre o evento e mandar materiais
           importantes. Nada de spam.&rdquo;
         </p>

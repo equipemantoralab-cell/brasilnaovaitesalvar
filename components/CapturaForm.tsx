@@ -62,11 +62,11 @@ export default function CapturaForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="poster-card paper-noise mx-auto flex w-full max-w-md flex-col gap-5 bg-paper p-6 text-ink sm:p-9"
+      className="poster-card paper-noise mx-auto flex w-full max-w-md flex-col gap-6 bg-paper p-6 text-ink sm:p-9"
       data-form="captura"
     >
       <div>
-        <label htmlFor="nome" className="mb-2 block text-sm font-extrabold text-forest">
+        <label htmlFor="nome" className="mb-2 block text-base font-black leading-tight text-ink">
           Seu nome
         </label>
         <input
@@ -74,7 +74,7 @@ export default function CapturaForm() {
           type="text"
           value={form.nome}
           onChange={(e) => setForm({ ...form, nome: e.target.value })}
-          className="min-h-12 w-full border-2 border-ink bg-paper px-4 py-3 text-base text-ink transition placeholder:text-ink/35 focus:bg-sun/10 focus:outline-none"
+          className="min-h-12 w-full border-2 border-ink bg-paper px-4 py-3 text-base font-medium text-ink transition placeholder:font-medium placeholder:text-ink/55 focus:bg-sun/10 focus:outline-none"
           aria-describedby={errors.nome ? 'error-nome' : undefined}
           data-field="nome"
         />
@@ -86,7 +86,7 @@ export default function CapturaForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className="mb-2 block text-sm font-extrabold text-forest">
+        <label htmlFor="email" className="mb-2 block text-base font-black leading-tight text-ink">
           Seu melhor e-mail
         </label>
         <input
@@ -94,7 +94,7 @@ export default function CapturaForm() {
           type="email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="min-h-12 w-full border-2 border-ink bg-paper px-4 py-3 text-base text-ink transition placeholder:text-ink/35 focus:bg-sun/10 focus:outline-none"
+          className="min-h-12 w-full border-2 border-ink bg-paper px-4 py-3 text-base font-medium text-ink transition placeholder:font-medium placeholder:text-ink/55 focus:bg-sun/10 focus:outline-none"
           aria-describedby={errors.email ? 'error-email' : undefined}
           data-field="email"
         />
@@ -106,7 +106,7 @@ export default function CapturaForm() {
       </div>
 
       <div>
-        <label htmlFor="whatsapp" className="mb-2 block text-sm font-extrabold text-forest">
+        <label htmlFor="whatsapp" className="mb-2 block text-base font-black leading-tight text-ink">
           Seu WhatsApp (com DDD)
         </label>
         <input
@@ -115,7 +115,7 @@ export default function CapturaForm() {
           placeholder="(11) 99999-9999"
           value={form.whatsapp}
           onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
-          className="min-h-12 w-full border-2 border-ink bg-paper px-4 py-3 text-base text-ink transition placeholder:text-ink/35 focus:bg-sun/10 focus:outline-none"
+          className="min-h-12 w-full border-2 border-ink bg-paper px-4 py-3 text-base font-medium text-ink transition placeholder:font-medium placeholder:text-ink/55 focus:bg-sun/10 focus:outline-none"
           aria-describedby={errors.whatsapp ? 'error-whatsapp' : undefined}
           data-field="whatsapp"
         />
@@ -129,7 +129,7 @@ export default function CapturaForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="poster-card mt-2 min-h-14 bg-sun px-6 py-4 text-sm font-black uppercase tracking-wide text-ink transition duration-300 hover:-translate-y-1 hover:bg-forest hover:text-paper disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+        className="poster-card mt-2 min-h-14 bg-sun px-6 py-4 text-base font-black uppercase tracking-wide text-ink transition duration-300 hover:-translate-y-1 hover:bg-forest hover:text-paper disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
         data-cta="captura-submit"
       >
         {submitting ? 'Enviando...' : 'FINALIZAR CADASTRO'}

@@ -243,9 +243,9 @@ export default function PesquisaPage() {
   }
 
   return (
-    <main className="quiz-surface relative min-h-screen overflow-hidden text-cream" data-page="pesquisa">
-      <div className="pointer-events-none fixed -left-24 top-16 h-72 w-72 rounded-full border border-lime/20" aria-hidden="true" />
-      <div className="pointer-events-none fixed -right-20 bottom-12 h-56 w-56 rotate-12 border-[22px] border-cream/[0.06]" aria-hidden="true" />
+    <main className="hero-kv-surface relative min-h-screen overflow-hidden text-ink" data-page="pesquisa">
+      <div className="pointer-events-none fixed -left-24 top-16 h-72 w-72 rounded-full border border-forest/25" aria-hidden="true" />
+      <div className="pointer-events-none fixed -right-20 bottom-12 h-56 w-56 rotate-12 border-[22px] border-forest/[0.09]" aria-hidden="true" />
 
       {screen === 'intro' && (
         <section className="relative z-10 flex min-h-[100svh] items-center justify-center px-5 py-12 text-center sm:px-8">
@@ -253,22 +253,22 @@ export default function PesquisaPage() {
             <span className="mb-6 border-2 border-ink bg-lime px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-ink shadow-lime">
               Quiz · Pesquisa
             </span>
-            <h1 className="font-display text-[clamp(4rem,15vw,8rem)] font-black uppercase leading-[0.78] tracking-[-0.035em] text-paper">
+            <h1 className="font-display text-[clamp(4rem,15vw,8rem)] font-black uppercase leading-[0.78] tracking-[-0.035em] text-ink">
               Seu presente começa aqui
             </h1>
-            <p className="mt-7 max-w-2xl text-xl font-black leading-snug text-cream sm:text-2xl">
+            <p className="mt-7 max-w-2xl text-xl font-black leading-snug text-ink sm:text-2xl">
               Toque no botão abaixo para começar o quiz e pegue seu presente no final. 👊
             </p>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-cream/75 sm:text-lg">
+            <p className="mt-4 max-w-2xl text-base leading-7 text-ink/75 sm:text-lg">
               São perguntas super rápidas pra entender melhor quem você é, o que mais tem te impedido de progredir na vida e o que você pode mudar pra ter um futuro melhor, independentemente de quem esteja no poder.
             </p>
-            <div className="mt-7 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.15em] text-lime">
+            <div className="mt-7 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.15em] text-forest">
               <span>12 perguntas</span><span aria-hidden="true">•</span><span>Cerca de 3 min</span>
             </div>
             <button
               type="button"
               onClick={startQuiz}
-              className="mt-9 min-h-14 w-full max-w-sm border-2 border-ink bg-lime px-8 py-4 font-display text-2xl font-black uppercase tracking-wide text-ink shadow-lime transition hover:-translate-y-1 hover:bg-paper sm:w-auto sm:min-w-80"
+              className="mt-9 min-h-14 w-full max-w-sm border-2 border-ink bg-forest px-8 py-4 font-display text-2xl font-black uppercase tracking-wide text-cream shadow-lime transition hover:-translate-y-1 hover:bg-ink sm:w-auto sm:min-w-80"
             >
               Começar agora →
             </button>
@@ -281,11 +281,11 @@ export default function PesquisaPage() {
           <div className="mx-auto w-full max-w-3xl animate-quiz-enter" key={question.id}>
             <div className="mb-6">
               <div className="mb-3 flex items-end justify-between gap-4">
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-lime">Pergunta {currentIndex + 1} de {QUESTIONS.length}</p>
-                <p className="text-xs font-bold text-cream/60">{Math.round(((currentIndex + 1) / QUESTIONS.length) * 100)}%</p>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-forest">Pergunta {currentIndex + 1} de {QUESTIONS.length}</p>
+                <p className="text-xs font-bold text-ink/60">{Math.round(((currentIndex + 1) / QUESTIONS.length) * 100)}%</p>
               </div>
-              <div className="h-2 overflow-hidden border border-cream/20 bg-ink/35">
-                <div className="h-full bg-lime transition-all duration-500" style={{ width: `${((currentIndex + 1) / QUESTIONS.length) * 100}%` }} />
+              <div className="h-2 overflow-hidden border border-ink/25 bg-ink/15">
+                <div className="h-full bg-forest transition-all duration-500" style={{ width: `${((currentIndex + 1) / QUESTIONS.length) * 100}%` }} />
               </div>
             </div>
 

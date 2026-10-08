@@ -50,6 +50,15 @@ body {
   background-blend-mode: normal, multiply;
 }
 
+.quiz-surface {
+  background-color: #287646;
+  background-image:
+    linear-gradient(rgba(40, 118, 70, 0.9), rgba(40, 118, 70, 0.9)),
+    url('/brand/textura-grunge.webp');
+  background-size: auto, 480px 480px;
+  background-blend-mode: normal, multiply;
+}
+
 .paper-noise {
   background-image:
     linear-gradient(rgba(245, 173, 62, 0.86), rgba(245, 173, 62, 0.86)),

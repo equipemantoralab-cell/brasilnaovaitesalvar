@@ -1,6 +1,16 @@
 // app/api/quiz-leads/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { appendToSheet } from '@/lib/googleSheets';
+import { appendToSheetWithHeader } from '@/lib/googleSheets';
+
+const HEADERS = [
+  'Data/hora',
+  'Nome',
+  'E-mail',
+  'WhatsApp',
+  'Pontuação total',
+  'Perfil do resultado',
+  'Resposta de segmentação',
+];
 
 function validateWhatsApp(value: string): boolean {
   const digits = value.replace(/\D/g, '');
@@ -36,11 +46,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'WhatsApp inválido' }, { status: 400 });
   }
 
-  // Columns: timestamp | nome | email | whatsapp | pontuacaoTotal | perfilResultado | respostaSegmentacao
-  // NOTE: The "Quiz Leads" tab must be created manually in the spreadsheet.
-  // See README.md for instructions.
   try {
-    await appendToSheet('Quiz Leads!A:G', [
+    await appendToSheetWithHeader('Quiz Leads', HEADERS, [
       [
         new Date().toISOString(),
         nome.trim(),

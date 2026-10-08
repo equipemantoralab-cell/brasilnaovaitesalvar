@@ -259,7 +259,7 @@ export default function PesquisaPage() {
             <p className="mt-7 max-w-2xl text-xl font-black leading-snug text-ink sm:text-2xl">
               Toque no botão abaixo para começar o quiz e pegue seu presente no final. 👊
             </p>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-ink/75 sm:text-lg">
+            <p className="mt-4 max-w-2xl text-base font-semibold leading-7 text-ink sm:text-lg">
               São perguntas super rápidas pra entender melhor quem você é, o que mais tem te impedido de progredir na vida e o que você pode mudar pra ter um futuro melhor, independentemente de quem esteja no poder.
             </p>
             <div className="mt-7 flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.15em] text-forest">

@@ -9,7 +9,7 @@ export default function ObrigadoPage() {
     trackEvent('CompleteRegistration', { plan: 'start' });
   }, []);
 
-  const groupUrl = process.env.NEXT_PUBLIC_WHATSAPP_GROUP_URL ?? '#';
+  const groupUrl = 'https://chat.whatsapp.com/IcJr86mbLH7Je4XjIxsMPz';
 
   return (
     <main
@@ -25,7 +25,7 @@ export default function ObrigadoPage() {
         </div>
 
         <div
-          className="mb-8 w-full"
+          className="poster-card mb-8 w-full bg-forest px-4 py-4 text-paper sm:px-5"
           role="progressbar"
           aria-valuenow={98}
           aria-valuemin={0}
@@ -33,9 +33,9 @@ export default function ObrigadoPage() {
           aria-label="Progresso da inscrição"
           data-progress="98"
         >
-          <p className="mb-3 text-sm font-black uppercase tracking-[0.12em] text-forest">Sua inscrição está 98% concluída!</p>
-          <div className="h-3 w-full overflow-hidden rounded-full bg-forest/10 p-0.5">
-            <div className="h-full rounded-full bg-gradient-to-r from-emerald to-lime shadow-sm" style={{ width: '98%' }} />
+          <p className="mb-3 text-sm font-black uppercase tracking-[0.12em] text-paper sm:text-base">Sua inscrição está 98% concluída!</p>
+          <div className="h-4 w-full overflow-hidden border-2 border-paper/80 bg-ink/35 p-0.5">
+            <div className="h-full bg-sun shadow-sm" style={{ width: '98%' }} />
           </div>
         </div>
 

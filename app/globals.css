@@ -41,6 +41,15 @@ body {
   background-blend-mode: normal, multiply;
 }
 
+.capture-surface {
+  background-color: #112b99;
+  background-image:
+    linear-gradient(rgba(17, 43, 153, 0.9), rgba(17, 43, 153, 0.9)),
+    url('/brand/textura-grunge.webp');
+  background-size: auto, 480px 480px;
+  background-blend-mode: normal, multiply;
+}
+
 .hero-kv-surface {
   background-color: #f5ad3e;
   background-image:

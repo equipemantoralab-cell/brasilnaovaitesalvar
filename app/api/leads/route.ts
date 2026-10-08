@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
 
   // Attempt to write to Google Sheets without blocking the visitor flow.
   try {
-    await appendToSheetWithHeader('Sheet1', HEADERS, [
+    await appendToSheetWithHeader('Ingresso Start', HEADERS, [
       [new Date().toISOString(), nome.trim(), email.trim(), whatsapp.trim()],
     ]);
   } catch (err) {

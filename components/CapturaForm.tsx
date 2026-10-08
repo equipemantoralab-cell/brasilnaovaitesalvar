@@ -52,7 +52,7 @@ export default function CapturaForm() {
     }
 
     try {
-      await submitNetlifyForm('ingresso-start', form);
+      await submitNetlifyForm('ingresso_start', form);
     } catch (err) {
       console.error('Netlify Forms submission error:', err);
     }

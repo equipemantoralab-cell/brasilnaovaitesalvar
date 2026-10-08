@@ -35,7 +35,7 @@ The checkout route (`/api/checkout`) creates a Payment Link via Asaas and return
 6. Create a Google Sheets spreadsheet. Copy the spreadsheet ID from its URL (the long string between `/d/` and `/edit`). Set `GOOGLE_SHEETS_SPREADSHEET_ID`.
 7. Share the spreadsheet with the service account email (Editor permission).
 
-The first sheet (`Sheet1`) will receive rows: `[timestamp, nome, email, whatsapp]`.
+The `Ingresso Start` sheet will receive rows: `[timestamp, nome, email, whatsapp]`.
 
 > **Note:** If the Sheets write fails (missing env vars, network error, permission issue), the user is **not** blocked — they are redirected to `/obrigado` and the error is logged server-side. Check your Vercel/server logs to monitor for failures.
 
@@ -94,7 +94,7 @@ app/
   obrigado/page.tsx   # /obrigado — Thank-you page with WhatsApp CTA
   quiz/page.tsx       # /quiz — Lead capture quiz (8 questions, 4 profiles)
   api/
-    leads/route.ts       # POST /api/leads — saves lead to Google Sheets (Sheet1)
+    leads/route.ts       # POST /api/leads — saves lead to Google Sheets (Ingresso Start)
     checkout/route.ts    # POST /api/checkout — creates Asaas payment link
     quiz-leads/route.ts  # POST /api/quiz-leads — saves quiz lead to "Quiz Leads" tab
 

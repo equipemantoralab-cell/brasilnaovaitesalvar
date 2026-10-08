@@ -5,13 +5,15 @@
     <title>Formulários do site</title>
   </head>
   <body>
-    <form name="ingresso-start" data-netlify="true" hidden>
+    <form name="ingresso-start" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="ingresso-start" />
       <input name="nome" />
       <input name="email" type="email" />
       <input name="whatsapp" />
     </form>
 
-    <form name="quiz-diagnostico" data-netlify="true" hidden>
+    <form name="quiz-diagnostico" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="quiz-diagnostico" />
       <input name="nome" />
       <input name="email" type="email" />
       <input name="whatsapp" />
@@ -20,7 +22,8 @@
       <input name="respostaSegmentacao" />
     </form>
 
-    <form name="pesquisa-grupo" data-netlify="true" hidden>
+    <form name="pesquisa-grupo" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="pesquisa-grupo" />
       <input name="idade" />
       <input name="genero" />
       <input name="relacionamento" />

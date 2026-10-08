@@ -29,15 +29,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'WhatsApp inválido' }, { status: 400 });
   }
 
-  // Attempt to write to Google Sheets (non-blocking on failure per spec)
+  let sheetsOk = true;
+
+  // Attempt to write to Google Sheets without blocking the visitor flow.
   try {
     await appendToSheetWithHeader('Sheet1', HEADERS, [
       [new Date().toISOString(), nome.trim(), email.trim(), whatsapp.trim()],
     ]);
   } catch (err) {
-    // Per spec: log error but do not block the user
+    sheetsOk = false;
     console.error('[leads] Google Sheets write failed:', err);
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, sheetsOk });
 }

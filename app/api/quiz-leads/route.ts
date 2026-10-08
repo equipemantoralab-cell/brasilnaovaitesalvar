@@ -28,6 +28,8 @@ interface QuizLeadBody {
 
 export async function POST(req: NextRequest) {
   let body: QuizLeadBody;
+  let sheetsOk = true;
+
   try {
     body = (await req.json()) as QuizLeadBody;
   } catch {
@@ -59,9 +61,9 @@ export async function POST(req: NextRequest) {
       ],
     ]);
   } catch (err) {
-    // Per spec: log error but do not block the user
+    sheetsOk = false;
     console.error('[quiz-leads] Google Sheets write failed:', err);
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, sheetsOk });
 }

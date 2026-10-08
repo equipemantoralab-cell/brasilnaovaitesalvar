@@ -38,6 +38,8 @@ type PesquisaBody = Partial<Record<Field, string | number>>;
 export async function POST(req: NextRequest) {
   let body: PesquisaBody;
 
+  let sheetsOk = true;
+
   try {
     body = (await req.json()) as PesquisaBody;
   } catch {
@@ -64,8 +66,9 @@ export async function POST(req: NextRequest) {
   try {
     await appendToSheetWithHeader('Pesquisa Quiz', HEADERS, [row]);
   } catch (error) {
+    sheetsOk = false;
     console.error('[pesquisa-respostas] Google Sheets write failed:', error);
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, sheetsOk });
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { appendToSheet } from '@/lib/googleSheets';
+import { appendToSheetWithHeader } from '@/lib/googleSheets';
 
 const FIELDS = [
   'idade',
@@ -15,6 +15,22 @@ const FIELDS = [
   'futuro_nas_maos',
   'compromisso_imersao',
 ] as const;
+
+const HEADERS = [
+  'Data/hora',
+  'Idade',
+  'Gênero',
+  'Status de relacionamento',
+  'Formação',
+  'Estado',
+  'Como se sentiria em 4 anos',
+  'Área mais urgente',
+  'Renda mensal',
+  'Maior preocupação com o futuro',
+  'Conquista até fevereiro de 2027',
+  'Futuro nas próprias mãos (0–10)',
+  'Compromisso com a imersão (0–10)',
+];
 
 type Field = (typeof FIELDS)[number];
 type PesquisaBody = Partial<Record<Field, string | number>>;
@@ -46,7 +62,7 @@ export async function POST(req: NextRequest) {
   ];
 
   try {
-    await appendToSheet('Pesquisa Quiz!A:M', [row]);
+    await appendToSheetWithHeader('Pesquisa Quiz', HEADERS, [row]);
   } catch (error) {
     console.error('[pesquisa-respostas] Google Sheets write failed:', error);
   }

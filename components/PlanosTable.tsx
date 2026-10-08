@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { PLANS } from '@/lib/plans';
 import { trackEvent } from '@/lib/analytics';
 
+type PlanKey = 'start' | 'pro' | 'premium';
+
 const features: Array<{ label: string; start: string; pro: string; premium: string }> = [
   {
     label: 'Acesso',
@@ -60,10 +62,11 @@ const features: Array<{ label: string; start: string; pro: string; premium: stri
 
 export default function PlanosTable() {
   const router = useRouter();
+  const [selectedPlan, setSelectedPlan] = useState<PlanKey>('pro');
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleCta(planKey: 'start' | 'pro' | 'premium') {
+  async function handleCta(planKey: PlanKey) {
     setError(null);
     if (planKey === 'start') {
       router.push('/captura');
@@ -112,7 +115,86 @@ export default function PlanosTable() {
           </p>
         )}
 
-        <div className="-mx-5 overflow-x-auto px-5 pb-5 sm:mx-0 sm:px-0">
+        <div className="sm:hidden">
+          <div
+            className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            aria-label="Escolha uma opção de ingresso"
+          >
+            {(['pro', 'start', 'premium'] as const).map((key) => {
+              const isSelected = selectedPlan === key;
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setSelectedPlan(key)}
+                  className={`relative min-w-[72%] snap-start border-2 p-5 text-left transition duration-200 ${isSelected ? 'border-sun bg-ink text-paper shadow-[6px_6px_0_#f7ca45]' : 'border-ink/20 bg-paper text-ink shadow-[4px_4px_0_rgba(35,35,36,0.22)]'}`}
+                  aria-pressed={isSelected}
+                >
+                  {key === 'pro' && (
+                    <span className="absolute -top-3 left-4 bg-sun px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-ink">
+                      Mais escolhido
+                    </span>
+                  )}
+                  <span className={`block text-[11px] font-extrabold uppercase tracking-[0.16em] ${isSelected ? 'text-paper/65' : 'text-ink/55'}`}>
+                    Ingresso
+                  </span>
+                  <span className={`mt-2 block font-display text-4xl uppercase leading-none ${isSelected ? 'text-sun' : 'text-forest'}`}>
+                    {PLANS[key].name}
+                  </span>
+                  <span className={`mt-4 block text-xl font-black ${isSelected ? 'text-paper' : 'text-ink'}`}>
+                    {PLANS[key].priceLabel}
+                  </span>
+                  <span className={`absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border-2 text-lg font-black ${isSelected ? 'border-sun bg-sun text-ink' : 'border-ink/20 text-transparent'}`} aria-hidden="true">
+                    ✓
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <article className="poster-card mt-4 overflow-hidden bg-paper text-ink" aria-live="polite">
+            <header className="border-b border-ink/15 p-6">
+              <span className="text-xs font-black uppercase tracking-[0.14em] text-forest">Ingresso selecionado</span>
+              <h3 className="mt-2 font-display text-5xl uppercase leading-none text-ink">{PLANS[selectedPlan].name}</h3>
+              <p className="mt-2 text-sm font-semibold text-ink/65">{PLANS[selectedPlan].badge}</p>
+              <p className="mt-6 flex flex-wrap items-baseline gap-2">
+                <span className="text-4xl font-black text-ink">{PLANS[selectedPlan].priceLabel}</span>
+                {selectedPlan === 'pro' && <span className="text-xs font-black uppercase tracking-wide text-forest">O mais escolhido</span>}
+              </p>
+            </header>
+
+            <ul>
+              {features.map((feature) => {
+                const value = feature[selectedPlan];
+                const isIncluded = value !== '—';
+                return (
+                  <li key={feature.label} className={`flex gap-3 border-b border-ink/10 px-6 py-4 ${isIncluded ? 'text-ink' : 'bg-cream/55 text-ink/40'}`}>
+                    <span className={`mt-0.5 text-xl font-black leading-none ${isIncluded ? 'text-forest' : 'text-campaignRed/55'}`} aria-hidden="true">
+                      {isIncluded ? '✓' : '×'}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <strong className="block text-sm font-extrabold leading-snug">{feature.label}</strong>
+                      {isIncluded && <span className="mt-1 block text-xs font-semibold text-ink/60">{value}</span>}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <div className="bg-cream p-5">
+              <button
+                onClick={() => handleCta(selectedPlan)}
+                disabled={loadingPlan !== null}
+                className="min-h-14 w-full border-2 border-ink bg-sun px-5 py-4 text-sm font-black uppercase tracking-wide text-ink shadow-[5px_5px_0_#232324] transition hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                data-cta={`plano-${selectedPlan}-mobile`}
+              >
+                {loadingPlan === selectedPlan ? 'Aguarde...' : PLANS[selectedPlan].cta}
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div className="hidden overflow-x-auto pb-5 sm:block">
           <table className="poster-card relative min-w-[780px] w-full border-separate border-spacing-0 overflow-hidden bg-paper text-ink" data-table="planos">
           <thead>
             <tr className="bg-cream">

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { trackEvent } from '@/lib/analytics';
+import { submitNetlifyForm } from '@/lib/netlifyForms';
 
 type Question =
   | {
@@ -224,18 +225,29 @@ export default function PesquisaPage() {
     }
 
     setSubmitting(true);
+    const completedAnswers = { ...answers, [question.id]: currentAnswer } as Record<
+      string,
+      string | number
+    >;
+
     try {
       const response = await fetch('/api/pesquisa-respostas', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...answers, [question.id]: currentAnswer }),
+        body: JSON.stringify(completedAnswers),
       });
       if (!response.ok) console.error('[pesquisa] API error:', await response.text());
     } catch (error) {
       console.error('[pesquisa] Submission error:', error);
-    } finally {
-      setSubmitting(false);
     }
+
+    try {
+      await submitNetlifyForm('pesquisa-grupo', completedAnswers);
+    } catch (error) {
+      console.error('[pesquisa] Netlify Forms submission error:', error);
+    }
+
+    setSubmitting(false);
 
     trackEvent('PesquisaComplete');
     setScreen('thanks');

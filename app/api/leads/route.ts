@@ -1,6 +1,8 @@
 // app/api/leads/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { appendToSheet } from '@/lib/googleSheets';
+import { appendToSheetWithHeader } from '@/lib/googleSheets';
+
+const HEADERS = ['Data/hora', 'Nome', 'E-mail', 'WhatsApp'];
 
 function validateWhatsApp(value: string): boolean {
   const digits = value.replace(/\D/g, '');
@@ -29,7 +31,7 @@ export async function POST(req: NextRequest) {
 
   // Attempt to write to Google Sheets (non-blocking on failure per spec)
   try {
-    await appendToSheet('Sheet1!A:D', [
+    await appendToSheetWithHeader('Sheet1', HEADERS, [
       [new Date().toISOString(), nome.trim(), email.trim(), whatsapp.trim()],
     ]);
   } catch (err) {

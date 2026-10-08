@@ -229,7 +229,7 @@ export default function QuizPage() {
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <main className="hero-surface relative min-h-screen overflow-hidden text-cream" data-page="quiz">
+    <main className="quiz-surface relative min-h-screen overflow-hidden text-cream" data-page="quiz">
 
       <div className="pointer-events-none fixed -left-24 top-16 h-64 w-64 rounded-full border border-lime/15 sm:h-96 sm:w-96" aria-hidden="true" />
       <div className="pointer-events-none fixed -right-20 bottom-10 h-48 w-48 rotate-12 border-[22px] border-sky/[0.07] sm:h-64 sm:w-64" aria-hidden="true" />
@@ -316,7 +316,7 @@ export default function QuizPage() {
               </div>
             </div>
 
-            <div key={currentIndex} className="animate-quiz-enter rounded-3xl border border-cream/10 bg-forest/55 p-4 shadow-2xl backdrop-blur-sm sm:p-8">
+            <div key={currentIndex} className="animate-quiz-enter rounded-3xl border border-cream/10 bg-ink/90 p-4 shadow-2xl backdrop-blur-sm sm:p-8">
               <h2
                 className="mb-6 text-center font-display text-3xl font-black uppercase leading-[1.02] tracking-tight text-paper sm:mb-8 sm:text-5xl"
                 data-quiz="question-text"
@@ -385,7 +385,7 @@ export default function QuizPage() {
             <form
               onSubmit={handleCaptureSubmit}
               noValidate
-              className="paper-noise flex flex-col gap-5 rounded-3xl border border-paper/60 bg-paper p-5 text-ink shadow-2xl sm:p-8"
+              className="cream-paper flex flex-col gap-5 rounded-3xl border border-ink bg-paper p-5 text-ink shadow-2xl sm:p-8"
               data-form="quiz-capture"
             >
               {/* Nome */}
@@ -499,7 +499,7 @@ export default function QuizPage() {
         >
           <div className="mx-auto w-full max-w-3xl animate-quiz-enter">
             <div
-              className="relative mb-6 overflow-hidden rounded-3xl border border-cream/15 bg-forest/75 p-5 text-paper shadow-2xl backdrop-blur-sm sm:mb-8 sm:p-10"
+              className="relative mb-6 overflow-hidden rounded-3xl border border-cream/15 bg-ink/90 p-5 text-paper shadow-2xl backdrop-blur-sm sm:mb-8 sm:p-10"
               data-quiz="result-card"
               data-profile={`perfil-${profile.id}`}
             >

@@ -4,6 +4,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { trackEvent } from '@/lib/analytics';
+import { submitNetlifyForm } from '@/lib/netlifyForms';
 
 function validateWhatsApp(value: string): boolean {
   // Accepts formats: 11999999999 (11 digits) or (11) 99999-9999
@@ -46,16 +47,19 @@ export default function CapturaForm() {
       if (!res.ok) {
         console.error('Lead API error:', await res.text());
       }
-      trackEvent('Lead', { plan: 'start' });
-      router.push('/obrigado');
     } catch (err) {
       console.error('Lead submission error:', err);
-      // Proceed anyway per spec
-      trackEvent('Lead', { plan: 'start' });
-      router.push('/obrigado');
-    } finally {
-      setSubmitting(false);
     }
+
+    try {
+      await submitNetlifyForm('ingresso-start', form);
+    } catch (err) {
+      console.error('Netlify Forms submission error:', err);
+    }
+
+    trackEvent('Lead', { plan: 'start' });
+    setSubmitting(false);
+    router.push('/obrigado');
   }
 
   return (
@@ -71,6 +75,7 @@ export default function CapturaForm() {
         </label>
         <input
           id="nome"
+          name="nome"
           type="text"
           value={form.nome}
           onChange={(e) => setForm({ ...form, nome: e.target.value })}
@@ -91,6 +96,7 @@ export default function CapturaForm() {
         </label>
         <input
           id="email"
+          name="email"
           type="email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -111,6 +117,7 @@ export default function CapturaForm() {
         </label>
         <input
           id="whatsapp"
+          name="whatsapp"
           type="tel"
           placeholder="(11) 99999-9999"
           value={form.whatsapp}

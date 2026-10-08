@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { QUIZ_QUESTIONS, getProfile, QuizProfile } from '@/lib/quizData';
 import { trackEvent } from '@/lib/analytics';
+import { submitNetlifyForm } from '@/lib/netlifyForms';
 
 interface FormState {
   nome: string;
@@ -187,9 +188,15 @@ export default function QuizPage() {
       }
     } catch (err) {
       console.error('[quiz] Lead submission error:', err);
-    } finally {
-      setSubmitting(false);
     }
+
+    try {
+      await submitNetlifyForm('quiz-diagnostico', payload);
+    } catch (err) {
+      console.error('[quiz] Netlify Forms submission error:', err);
+    }
+
+    setSubmitting(false);
 
     // Fire analytics after the try/catch so it always runs, even on network errors
     trackEvent('QuizLead', { perfil: profile?.label });
@@ -398,6 +405,7 @@ export default function QuizPage() {
                 </label>
                 <input
                   id="quiz-nome"
+                  name="nome"
                   type="text"
                   value={form.nome}
                   onChange={(e) => setForm({ ...form, nome: e.target.value })}
@@ -427,6 +435,7 @@ export default function QuizPage() {
                 </label>
                 <input
                   id="quiz-whatsapp"
+                  name="whatsapp"
                   type="tel"
                   placeholder="(11) 99999-9999"
                   value={form.whatsapp}
@@ -457,6 +466,7 @@ export default function QuizPage() {
                 </label>
                 <input
                   id="quiz-email"
+                  name="email"
                   type="email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}

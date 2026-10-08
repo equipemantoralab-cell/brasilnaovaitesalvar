@@ -13,7 +13,7 @@ export default function ObrigadoPage() {
 
   return (
     <main
-      className="hero-surface relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-16 text-center text-cream sm:px-8"
+      className="capture-surface relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-16 text-center text-cream sm:px-8"
       data-page="obrigado"
     >
       <img src="/brand/marker-seta.svg" alt="" className="pointer-events-none absolute right-10 top-10 w-16 rotate-[18deg]" aria-hidden="true" />

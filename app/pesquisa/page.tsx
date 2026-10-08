@@ -250,9 +250,6 @@ export default function PesquisaPage() {
       {screen === 'intro' && (
         <section className="relative z-10 flex min-h-[100svh] items-center justify-center px-5 py-12 text-center sm:px-8">
           <div className="mx-auto flex max-w-3xl animate-quiz-enter flex-col items-center">
-            <span className="mb-6 border-2 border-ink bg-lime px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-ink shadow-lime">
-              Quiz · Pesquisa
-            </span>
             <h1 className="font-display text-[clamp(4rem,15vw,8rem)] font-black uppercase leading-[0.78] tracking-[-0.035em] text-ink">
               Seu presente começa aqui
             </h1>

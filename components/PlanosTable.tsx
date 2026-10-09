@@ -128,26 +128,26 @@ export default function PlanosTable() {
                   key={key}
                   type="button"
                   onClick={() => setSelectedPlan(key)}
-                  className={`relative flex min-h-[142px] min-w-0 flex-col border-2 p-3 text-left transition duration-200 ${isSelected ? 'border-sun bg-ink text-paper shadow-[3px_3px_0_#f7ca45]' : 'border-ink/20 bg-paper text-ink'}`}
+                  className={`relative flex min-h-[118px] min-w-0 flex-col border-2 p-2.5 text-left transition duration-200 ${isSelected ? 'border-sun bg-ink text-paper shadow-[3px_3px_0_#f7ca45]' : 'border-ink/20 bg-paper text-ink'}`}
                   aria-pressed={isSelected}
                 >
-                  <span className="flex h-5 w-full items-start">
+                  <span className="flex h-4 w-full items-start">
                     {key === 'pro' && (
-                      <span className="max-w-full bg-sun px-1.5 py-1 text-[8px] font-black uppercase leading-none tracking-[0.05em] text-ink">
+                      <span className="max-w-full bg-sun px-1.5 py-0.5 text-[7px] font-black uppercase leading-none tracking-[0.04em] text-ink">
                       Mais escolhido
                       </span>
                     )}
                   </span>
-                  <span className={`mt-2 block text-[9px] font-extrabold uppercase tracking-[0.12em] ${isSelected ? 'text-paper/65' : 'text-ink/55'}`}>
+                  <span className={`mt-1.5 block text-[8px] font-extrabold uppercase tracking-[0.1em] ${isSelected ? 'text-paper/65' : 'text-ink/55'}`}>
                     Ingresso
                   </span>
-                  <span className={`mt-1 block break-words font-display text-[clamp(1.25rem,6vw,1.65rem)] uppercase leading-none ${isSelected ? 'text-sun' : 'text-forest'}`}>
+                  <span className={`mt-1 block whitespace-nowrap font-display uppercase leading-none ${key === 'premium' ? 'text-[1rem]' : 'text-[1.45rem]'} ${isSelected ? 'text-sun' : 'text-forest'}`}>
                     {shortName}
                   </span>
-                  <span className={`mt-auto block pr-7 pt-3 text-sm font-black leading-none ${isSelected ? 'text-paper' : 'text-ink'}`}>
+                  <span className={`mt-auto block whitespace-nowrap pr-6 pt-2 text-[12px] font-black leading-none ${isSelected ? 'text-paper' : 'text-ink'}`}>
                     {PLANS[key].priceLabel}
                   </span>
-                  <span className={`absolute bottom-2.5 right-2.5 flex h-6 w-6 items-center justify-center rounded-full border-2 text-xs font-black ${isSelected ? 'border-sun bg-sun text-ink' : 'border-ink/20 text-transparent'}`} aria-hidden="true">
+                  <span className={`absolute bottom-2 right-2 flex h-5 w-5 items-center justify-center rounded-full border-2 text-[10px] font-black ${isSelected ? 'border-sun bg-sun text-ink' : 'border-ink/20 text-transparent'}`} aria-hidden="true">
                     ✓
                   </span>
                 </button>
@@ -155,40 +155,40 @@ export default function PlanosTable() {
             })}
           </div>
 
-          <article className="poster-card mt-4 overflow-hidden bg-paper text-ink" aria-live="polite">
-            <header className="border-b border-ink/15 p-6">
-              <span className="text-xs font-black uppercase tracking-[0.14em] text-forest">Ingresso selecionado</span>
-              <h3 className="mt-2 font-display text-5xl uppercase leading-none text-ink">{PLANS[selectedPlan].name}</h3>
-              <p className="mt-2 text-sm font-semibold text-ink/65">{PLANS[selectedPlan].badge}</p>
-              <p className="mt-6 flex flex-wrap items-baseline gap-2">
-                <span className="text-4xl font-black text-ink">{PLANS[selectedPlan].priceLabel}</span>
-                {selectedPlan === 'pro' && <span className="text-xs font-black uppercase tracking-wide text-forest">O mais escolhido</span>}
+          <article className="poster-card mt-3 overflow-hidden bg-paper text-ink" aria-live="polite">
+            <header className="border-b border-ink/15 p-4">
+              <span className="text-[9px] font-black uppercase tracking-[0.12em] text-forest">Ingresso selecionado</span>
+              <h3 className="mt-1 font-display text-3xl uppercase leading-none text-ink">{PLANS[selectedPlan].name}</h3>
+              <p className="mt-1 text-[11px] font-semibold text-ink/65">{PLANS[selectedPlan].badge}</p>
+              <p className="mt-3 flex flex-wrap items-baseline gap-2">
+                <span className="text-2xl font-black text-ink">{PLANS[selectedPlan].priceLabel}</span>
+                {selectedPlan === 'pro' && <span className="text-[9px] font-black uppercase tracking-wide text-forest">O mais escolhido</span>}
               </p>
             </header>
 
-            <ul>
+            <ul className="grid grid-cols-2">
               {features.map((feature) => {
                 const value = feature[selectedPlan];
                 const isIncluded = value !== '—';
                 return (
-                  <li key={feature.label} className={`flex gap-3 border-b border-ink/10 px-6 py-4 ${isIncluded ? 'text-ink' : 'bg-cream/55 text-ink/40'}`}>
-                    <span className={`mt-0.5 text-xl font-black leading-none ${isIncluded ? 'text-forest' : 'text-campaignRed/55'}`} aria-hidden="true">
+                  <li key={feature.label} className={`flex min-h-[48px] gap-2 border-b border-ink/10 px-3 py-2.5 odd:border-r ${isIncluded ? 'text-ink' : 'bg-cream/55 text-ink/40'}`}>
+                    <span className={`text-sm font-black leading-none ${isIncluded ? 'text-forest' : 'text-campaignRed/55'}`} aria-hidden="true">
                       {isIncluded ? '✓' : '×'}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <strong className="block text-sm font-extrabold leading-snug">{feature.label}</strong>
-                      {isIncluded && <span className="mt-1 block text-xs font-semibold text-ink/60">{value}</span>}
+                      <strong className="block text-[10px] font-extrabold leading-tight">{feature.label}</strong>
+                      {isIncluded && <span className="mt-0.5 block text-[9px] font-semibold leading-tight text-ink/60">{value}</span>}
                     </span>
                   </li>
                 );
               })}
             </ul>
 
-            <div className="bg-cream p-5">
+            <div className="bg-cream p-3">
               <button
                 onClick={() => handleCta(selectedPlan)}
                 disabled={loadingPlan !== null}
-                className="min-h-14 w-full border-2 border-ink bg-sun px-5 py-4 text-sm font-black uppercase tracking-wide text-ink shadow-[5px_5px_0_#232324] transition hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+                className="min-h-11 w-full border-2 border-ink bg-sun px-4 py-3 text-xs font-black uppercase tracking-wide text-ink shadow-[4px_4px_0_#232324] transition hover:-translate-y-1 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
                 data-cta={`plano-${selectedPlan}-mobile`}
               >
                 {loadingPlan === selectedPlan ? 'Aguarde...' : PLANS[selectedPlan].cta}

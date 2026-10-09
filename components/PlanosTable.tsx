@@ -117,34 +117,37 @@ export default function PlanosTable() {
 
         <div className="sm:hidden">
           <div
-            className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="grid grid-cols-3 gap-2"
             aria-label="Escolha uma opção de ingresso"
           >
             {(['pro', 'start', 'premium'] as const).map((key) => {
               const isSelected = selectedPlan === key;
+              const shortName = key === 'start' ? 'Start' : key === 'pro' ? 'Pro' : 'Premium';
               return (
                 <button
                   key={key}
                   type="button"
                   onClick={() => setSelectedPlan(key)}
-                  className={`relative min-w-[72%] snap-start border-2 p-5 text-left transition duration-200 ${isSelected ? 'border-sun bg-ink text-paper shadow-[6px_6px_0_#f7ca45]' : 'border-ink/20 bg-paper text-ink shadow-[4px_4px_0_rgba(35,35,36,0.22)]'}`}
+                  className={`relative flex min-h-[142px] min-w-0 flex-col border-2 p-3 text-left transition duration-200 ${isSelected ? 'border-sun bg-ink text-paper shadow-[3px_3px_0_#f7ca45]' : 'border-ink/20 bg-paper text-ink'}`}
                   aria-pressed={isSelected}
                 >
-                  {key === 'pro' && (
-                    <span className="absolute -top-3 left-4 bg-sun px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-ink">
+                  <span className="flex h-5 w-full items-start">
+                    {key === 'pro' && (
+                      <span className="max-w-full bg-sun px-1.5 py-1 text-[8px] font-black uppercase leading-none tracking-[0.05em] text-ink">
                       Mais escolhido
-                    </span>
-                  )}
-                  <span className={`block text-[11px] font-extrabold uppercase tracking-[0.16em] ${isSelected ? 'text-paper/65' : 'text-ink/55'}`}>
+                      </span>
+                    )}
+                  </span>
+                  <span className={`mt-2 block text-[9px] font-extrabold uppercase tracking-[0.12em] ${isSelected ? 'text-paper/65' : 'text-ink/55'}`}>
                     Ingresso
                   </span>
-                  <span className={`mt-2 block font-display text-4xl uppercase leading-none ${isSelected ? 'text-sun' : 'text-forest'}`}>
-                    {PLANS[key].name}
+                  <span className={`mt-1 block break-words font-display text-[clamp(1.25rem,6vw,1.65rem)] uppercase leading-none ${isSelected ? 'text-sun' : 'text-forest'}`}>
+                    {shortName}
                   </span>
-                  <span className={`mt-4 block text-xl font-black ${isSelected ? 'text-paper' : 'text-ink'}`}>
+                  <span className={`mt-auto block pr-7 pt-3 text-sm font-black leading-none ${isSelected ? 'text-paper' : 'text-ink'}`}>
                     {PLANS[key].priceLabel}
                   </span>
-                  <span className={`absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border-2 text-lg font-black ${isSelected ? 'border-sun bg-sun text-ink' : 'border-ink/20 text-transparent'}`} aria-hidden="true">
+                  <span className={`absolute bottom-2.5 right-2.5 flex h-6 w-6 items-center justify-center rounded-full border-2 text-xs font-black ${isSelected ? 'border-sun bg-sun text-ink' : 'border-ink/20 text-transparent'}`} aria-hidden="true">
                     ✓
                   </span>
                 </button>

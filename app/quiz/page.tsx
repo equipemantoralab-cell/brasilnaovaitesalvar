@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { QUIZ_QUESTIONS, getProfile, QuizProfile } from '@/lib/quizData';
 import { trackEvent } from '@/lib/analytics';
+import { getPagTrustCheckoutUrl } from '@/lib/checkout';
 import { submitNetlifyForm } from '@/lib/netlifyForms';
 
 interface FormState {
@@ -207,26 +208,13 @@ export default function QuizPage() {
 
   // ── Result CTAs ────────────────────────────────────────────────────────────
 
-  async function handlePremiumCheckout() {
+  function handlePremiumCheckout() {
     setCheckoutLoading(true);
     try {
       trackEvent('InitiateCheckout', { plan: 'premium' });
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plano: 'premium' }),
-      });
-      const data = (await res.json()) as { checkoutUrl?: string; error?: string };
-      if (!res.ok) {
-        console.error('[quiz] Checkout error:', data.error);
-        return;
-      }
-      if (data.checkoutUrl) {
-        window.location.href = data.checkoutUrl;
-      }
+      window.location.assign(getPagTrustCheckoutUrl('premium'));
     } catch (err) {
-      console.error('[quiz] Checkout network error:', err);
-    } finally {
+      console.error('[quiz] Checkout redirect error:', err);
       setCheckoutLoading(false);
     }
   }

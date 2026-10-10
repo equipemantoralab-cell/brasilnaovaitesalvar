@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { PLANS } from '@/lib/plans';
 import { trackEvent } from '@/lib/analytics';
+import { getPagTrustCheckoutUrl } from '@/lib/checkout';
 
 type PlanKey = 'start' | 'pro' | 'premium';
 
@@ -66,7 +67,7 @@ export default function PlanosTable() {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleCta(planKey: PlanKey) {
+  function handleCta(planKey: PlanKey) {
     setError(null);
     if (planKey === 'start') {
       router.push('/captura');
@@ -76,22 +77,9 @@ export default function PlanosTable() {
     setLoadingPlan(planKey);
     try {
       trackEvent('InitiateCheckout', { plan: planKey });
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plano: planKey }),
-      });
-      const data = (await res.json()) as { checkoutUrl?: string; error?: string };
-      if (!res.ok) {
-        setError(data.error ?? 'Erro ao iniciar checkout. Tente novamente.');
-        return;
-      }
-      if (data.checkoutUrl) {
-        window.location.href = data.checkoutUrl;
-      }
+      window.location.assign(getPagTrustCheckoutUrl(planKey));
     } catch {
-      setError('Erro de conexão. Verifique sua internet e tente novamente.');
-    } finally {
+      setError('Não foi possível abrir o checkout. Tente novamente.');
       setLoadingPlan(null);
     }
   }

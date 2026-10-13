@@ -87,6 +87,16 @@ export async function appendToSheetWithHeader(
       },
     });
 
+  }
+
+  const currentHeaderResponse = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: `'${escapedTitle}'!A1:${lastColumn}1`,
+  });
+  const currentHeaders = currentHeaderResponse.data.values?.[0] ?? [];
+  const headersMatch = headers.every((header, index) => currentHeaders[index] === header);
+
+  if (!headersMatch) {
     await sheets.spreadsheets.values.update({
       spreadsheetId,
       range: `'${escapedTitle}'!A1:${lastColumn}1`,

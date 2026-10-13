@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { trackEvent } from '@/lib/analytics';
+import { getAttributionData } from '@/lib/attribution';
 import { submitNetlifyForm } from '@/lib/netlifyForms';
 
 type Question =
@@ -242,7 +243,7 @@ export default function PesquisaPage() {
     }
 
     setSubmitting(true);
-    const completedAnswers = { ...answers, [question.id]: answer } as Record<
+    const completedAnswers = { ...answers, [question.id]: answer, ...getAttributionData() } as Record<
       string,
       string | number
     >;

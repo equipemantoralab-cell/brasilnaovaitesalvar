@@ -1,8 +1,9 @@
 // app/api/leads/route.ts
 import { NextRequest, NextResponse } from 'next/server';
+import { ATTRIBUTION_HEADERS, getAttributionValues } from '@/lib/attribution';
 import { appendToSheetWithHeader } from '@/lib/googleSheets';
 
-const HEADERS = ['Data/hora', 'Nome', 'E-mail', 'WhatsApp'];
+const HEADERS = ['Data/hora', 'Nome', 'E-mail', 'WhatsApp', ...ATTRIBUTION_HEADERS];
 
 function validateWhatsApp(value: string): boolean {
   const digits = value.replace(/\D/g, '');
@@ -10,9 +11,13 @@ function validateWhatsApp(value: string): boolean {
 }
 
 export async function POST(req: NextRequest) {
-  let body: { nome?: string; email?: string; whatsapp?: string };
+  let body: Record<string, unknown> & { nome?: string; email?: string; whatsapp?: string };
   try {
-    body = (await req.json()) as { nome?: string; email?: string; whatsapp?: string };
+    body = (await req.json()) as Record<string, unknown> & {
+      nome?: string;
+      email?: string;
+      whatsapp?: string;
+    };
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
   }
@@ -34,7 +39,13 @@ export async function POST(req: NextRequest) {
   // Attempt to write to Google Sheets without blocking the visitor flow.
   try {
     await appendToSheetWithHeader('Ingresso Start', HEADERS, [
-      [new Date().toISOString(), nome.trim(), email.trim(), whatsapp.trim()],
+      [
+        new Date().toISOString(),
+        nome.trim(),
+        email.trim(),
+        whatsapp.trim(),
+        ...getAttributionValues(body),
+      ],
     ]);
   } catch (err) {
     sheetsOk = false;

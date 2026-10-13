@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { ATTRIBUTION_HEADERS, getAttributionValues } from '@/lib/attribution';
 import { appendToSheetWithHeader } from '@/lib/googleSheets';
 
 const FIELDS = [
@@ -30,10 +31,11 @@ const HEADERS = [
   'Conquista até fevereiro de 2027',
   'Futuro nas próprias mãos (0–10)',
   'Compromisso com a imersão (0–10)',
+  ...ATTRIBUTION_HEADERS,
 ];
 
 type Field = (typeof FIELDS)[number];
-type PesquisaBody = Partial<Record<Field, string | number>>;
+type PesquisaBody = Partial<Record<Field, string | number>> & Record<string, unknown>;
 
 export async function POST(req: NextRequest) {
   let body: PesquisaBody;
@@ -61,6 +63,7 @@ export async function POST(req: NextRequest) {
       const value = body[field];
       return typeof value === 'string' ? value.trim() : (value ?? '');
     }),
+    ...getAttributionValues(body),
   ];
 
   try {

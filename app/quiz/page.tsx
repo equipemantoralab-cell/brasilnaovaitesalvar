@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { QUIZ_QUESTIONS, getProfile, QuizProfile } from '@/lib/quizData';
 import { trackEvent } from '@/lib/analytics';
+import { getAttributionData } from '@/lib/attribution';
 import { getPagTrustCheckoutUrl } from '@/lib/checkout';
 import { submitNetlifyForm } from '@/lib/netlifyForms';
 
@@ -175,6 +176,7 @@ export default function QuizPage() {
       pontuacaoTotal: score,
       perfilResultado: profile?.label ?? '',
       respostaSegmentacao: (answers[0] as string | null) ?? '',
+      ...getAttributionData(),
     };
 
     // Non-blocking: API failure must NOT stop the user from seeing their result

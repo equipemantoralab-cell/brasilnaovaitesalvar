@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { Suspense } from 'react';
 import './globals.css';
 import AnalyticsGA4 from '@/components/AnalyticsGA4';
+import AttributionCapture from '@/components/AttributionCapture';
 import MetaPixel from '@/components/MetaPixel';
 
 export const metadata: Metadata = {
@@ -27,6 +29,9 @@ export default function RootLayout({
         </Script>
         <AnalyticsGA4 />
         <MetaPixel />
+        <Suspense fallback={null}>
+          <AttributionCapture />
+        </Suspense>
         {children}
       </body>
     </html>

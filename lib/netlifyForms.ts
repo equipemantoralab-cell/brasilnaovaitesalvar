@@ -1,10 +1,14 @@
+import { getAttributionData } from '@/lib/attribution';
+
 export async function submitNetlifyForm(
   formName: string,
   data: Record<string, string | number>
 ): Promise<void> {
   const body = new URLSearchParams({ 'form-name': formName });
 
-  Object.entries(data).forEach(([key, value]) => {
+  const payload = { ...data, ...getAttributionData() };
+
+  Object.entries(payload).forEach(([key, value]) => {
     body.append(key, String(value));
   });
 

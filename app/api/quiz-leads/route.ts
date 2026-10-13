@@ -1,5 +1,6 @@
 // app/api/quiz-leads/route.ts
 import { NextRequest, NextResponse } from 'next/server';
+import { ATTRIBUTION_HEADERS, getAttributionValues } from '@/lib/attribution';
 import { appendToSheetWithHeader } from '@/lib/googleSheets';
 
 const HEADERS = [
@@ -10,6 +11,7 @@ const HEADERS = [
   'Pontuação total',
   'Perfil do resultado',
   'Resposta de segmentação',
+  ...ATTRIBUTION_HEADERS,
 ];
 
 function validateWhatsApp(value: string): boolean {
@@ -17,7 +19,7 @@ function validateWhatsApp(value: string): boolean {
   return digits.length === 11;
 }
 
-interface QuizLeadBody {
+interface QuizLeadBody extends Record<string, unknown> {
   nome?: string;
   email?: string;
   whatsapp?: string;
@@ -58,6 +60,7 @@ export async function POST(req: NextRequest) {
         pontuacaoTotal ?? '',
         perfilResultado ?? '',
         respostaSegmentacao ?? '',
+        ...getAttributionValues(body),
       ],
     ]);
   } catch (err) {

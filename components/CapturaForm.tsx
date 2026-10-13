@@ -4,6 +4,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { trackEvent } from '@/lib/analytics';
+import { getAttributionData } from '@/lib/attribution';
 import { submitNetlifyForm } from '@/lib/netlifyForms';
 
 function validateWhatsApp(value: string): boolean {
@@ -37,11 +38,12 @@ export default function CapturaForm() {
     }
     setErrors({});
     setSubmitting(true);
+    const payload = { ...form, ...getAttributionData() };
     try {
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       // Per spec: do not block the user on API failure
       if (!res.ok) {
@@ -52,7 +54,7 @@ export default function CapturaForm() {
     }
 
     try {
-      await submitNetlifyForm('ingresso_start', form);
+      await submitNetlifyForm('ingresso_start', payload);
     } catch (err) {
       console.error('Netlify Forms submission error:', err);
     }

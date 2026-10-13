@@ -181,6 +181,7 @@ export default function PesquisaPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const [submitting, setSubmitting] = useState(false);
+  const [autoAdvancing, setAutoAdvancing] = useState(false);
   const [showValidation, setShowValidation] = useState(false);
 
   const question = QUESTIONS[currentIndex];
@@ -199,9 +200,21 @@ export default function PesquisaPage() {
     setShowValidation(false);
   }
 
-  function hasAnswer() {
-    if (typeof currentAnswer === 'number') return true;
-    return typeof currentAnswer === 'string' && currentAnswer.trim().length > 0;
+  function hasAnswer(answer: string | number | undefined = currentAnswer) {
+    if (typeof answer === 'number') return true;
+    return typeof answer === 'string' && answer.trim().length > 0;
+  }
+
+  function selectAndAdvance(value: string | number) {
+    if (autoAdvancing || submitting) return;
+
+    setAnswer(value);
+    setAutoAdvancing(true);
+
+    setTimeout(() => {
+      setAutoAdvancing(false);
+      void continueQuiz(value);
+    }, 400);
   }
 
   function goBack() {
@@ -213,8 +226,10 @@ export default function PesquisaPage() {
     setCurrentIndex((index) => index - 1);
   }
 
-  async function continueQuiz() {
-    if (!hasAnswer()) {
+  async function continueQuiz(answerOverride?: string | number) {
+    const answer = answerOverride ?? currentAnswer;
+
+    if (!hasAnswer(answer)) {
       setShowValidation(true);
       return;
     }
@@ -227,7 +242,7 @@ export default function PesquisaPage() {
     }
 
     setSubmitting(true);
-    const completedAnswers = { ...answers, [question.id]: currentAnswer } as Record<
+    const completedAnswers = { ...answers, [question.id]: answer } as Record<
       string,
       string | number
     >;
@@ -315,7 +330,8 @@ export default function PesquisaPage() {
                         <button
                           type="button"
                           key={option}
-                          onClick={() => setAnswer(option)}
+                          onClick={() => selectAndAdvance(option)}
+                          disabled={autoAdvancing}
                           aria-pressed={selected}
                           className={`min-h-14 border-2 px-4 py-3 text-left text-sm font-bold leading-snug transition sm:text-base ${selected ? 'border-lime bg-lime text-ink shadow-[5px_5px_0_#fffdee]' : 'border-cream/20 bg-cream/[0.06] text-cream hover:border-lime hover:bg-cream/[0.1]'}`}
                         >
@@ -332,7 +348,8 @@ export default function PesquisaPage() {
                 {question.type === 'state' && (
                   <select
                     value={typeof currentAnswer === 'string' ? currentAnswer : ''}
-                    onChange={(event) => setAnswer(event.target.value)}
+                    onChange={(event) => selectAndAdvance(event.target.value)}
+                    disabled={autoAdvancing}
                     className="min-h-16 w-full appearance-none border-2 border-cream/25 bg-cream px-5 py-4 text-base font-bold text-ink focus:border-lime sm:text-lg"
                   >
                     <option value="" disabled>Selecione uma opção</option>
@@ -360,7 +377,8 @@ export default function PesquisaPage() {
                           <button
                             type="button"
                             key={value}
-                            onClick={() => setAnswer(value)}
+                            onClick={() => selectAndAdvance(value)}
+                            disabled={autoAdvancing || submitting}
                             aria-label={`${value} de 10`}
                             aria-pressed={selected}
                             className={`aspect-square min-h-11 border-2 font-display text-2xl font-black transition ${selected ? 'border-lime bg-lime text-ink shadow-[4px_4px_0_#fffdee]' : 'border-cream/25 bg-cream/[0.06] text-cream hover:border-lime'}`}
@@ -386,14 +404,16 @@ export default function PesquisaPage() {
                 <button type="button" onClick={goBack} className="min-h-12 border-2 border-cream/25 px-6 py-3 text-sm font-black uppercase tracking-wider text-cream transition hover:border-cream">
                   ← Voltar
                 </button>
-                <button
-                  type="button"
-                  onClick={continueQuiz}
-                  disabled={submitting}
-                  className="min-h-12 border-2 border-ink bg-lime px-7 py-3 font-display text-xl font-black uppercase tracking-wide text-ink shadow-[5px_5px_0_#fffdee] transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70"
-                >
-                  {submitting ? 'Enviando…' : currentIndex === QUESTIONS.length - 1 ? 'Desbloquear presente →' : 'Continuar →'}
-                </button>
+                {question.type === 'text' && (
+                  <button
+                    type="button"
+                    onClick={() => void continueQuiz()}
+                    disabled={submitting}
+                    className="min-h-12 border-2 border-ink bg-lime px-7 py-3 font-display text-xl font-black uppercase tracking-wide text-ink shadow-[5px_5px_0_#fffdee] transition hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70"
+                  >
+                    {submitting ? 'Enviando…' : 'Continuar →'}
+                  </button>
+                )}
               </div>
             </div>
           </div>

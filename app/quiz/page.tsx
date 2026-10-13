@@ -5,8 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { QUIZ_QUESTIONS, getProfile, QuizProfile } from '@/lib/quizData';
 import { trackEvent } from '@/lib/analytics';
-import { getAttributionData } from '@/lib/attribution';
-import { getPagTrustCheckoutUrl } from '@/lib/checkout';
+import { appendAttributionToUrl, getAttributionData } from '@/lib/attribution';
 import { submitNetlifyForm } from '@/lib/netlifyForms';
 
 interface FormState {
@@ -214,7 +213,9 @@ export default function QuizPage() {
     setCheckoutLoading(true);
     try {
       trackEvent('InitiateCheckout', { plan: 'premium' });
-      window.location.assign(getPagTrustCheckoutUrl('premium'));
+      window.location.assign(
+        appendAttributionToUrl('https://brasil.barcelosdecristo.com.br/#ingressos')
+      );
     } catch (err) {
       console.error('[quiz] Checkout redirect error:', err);
       setCheckoutLoading(false);
@@ -552,7 +553,16 @@ export default function QuizPage() {
                 className="min-h-14 flex-1 rounded-xl bg-lime px-5 py-4 font-display text-lg font-black uppercase tracking-wide text-ink shadow-lime transition duration-300 hover:-translate-y-1 hover:bg-paper hover:shadow-2xl active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 sm:text-xl"
                 data-cta="quiz-premium"
               >
-                {checkoutLoading ? 'Aguarde...' : 'QUERO O INGRESSO PREMIUM'}
+                {checkoutLoading ? (
+                  'Aguarde...'
+                ) : (
+                  <span className="flex flex-col items-center leading-tight">
+                    <span>QUERO O INGRESSO PREMIUM</span>
+                    <span className="mt-1 font-sans text-xs font-extrabold normal-case tracking-normal sm:text-sm">
+                      a partir de R$29,90
+                    </span>
+                  </span>
+                )}
               </button>
             </div>
           </div>

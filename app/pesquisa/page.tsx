@@ -185,7 +185,9 @@ export default function PesquisaPage() {
 
   const question = QUESTIONS[currentIndex];
   const currentAnswer = answers[question?.id];
-  const giftUrl = process.env.NEXT_PUBLIC_AULA_AQUECIMENTO_URL ?? '';
+  const giftUrl =
+    process.env.NEXT_PUBLIC_AULA_AQUECIMENTO_URL ??
+    'https://drive.google.com/file/d/1N_J8YJkyFfEdduMURe9hUwSqhGCLOxh9/view';
 
   function startQuiz() {
     trackEvent('PesquisaStart');
